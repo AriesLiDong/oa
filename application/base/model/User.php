@@ -16,8 +16,9 @@ class User extends Model
 		return $user;
 	}
 
-	public function getUserByName($name)
+	public function getUserByNamePwd($name,$pwd)
 	{
-		
+		$user = User::get(['username'=>$name,'pwd'=>md5($pwd)]);
+		return $user;
 	}
 }

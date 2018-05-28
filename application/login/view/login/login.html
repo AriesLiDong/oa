@@ -114,8 +114,13 @@
             $("#submit").click(function(){
                 var name = $('input[name="form-username"]').val();
                 var pwd = $('input[name="form-password"]').val();
-                loadPOST('dologin',{'name':name,'pwd':pwd},function(res){
-                    console.log(res);
+                loadPOST('dologin',{'name':name,'pwd':pwd},function(data){
+                   if(data.res){
+                       window.location.href=data.url;
+                   }else{
+                       alert('用户名密码错误');
+                   }
+
                 });                         
             });
         });

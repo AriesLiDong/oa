@@ -1,6 +1,8 @@
 <?php
 namespace app\base\controller;
 use app\base\controller\Base as BaseController;
+use think\Config;
+use think\Session;
 /**
  * by shenlidong
  * 登录功能
@@ -14,7 +16,7 @@ class Auth extends BaseController
 	/**
 	 * 构造函数
 	 */
-	public function _initalize()
+	public function _initialize()
 	{
 		parent::_initialize();
 		$this->login_type = Config::get("login_type") ? Config::get("login_type") : 'session';
@@ -28,8 +30,8 @@ class Auth extends BaseController
 		$check_status = false;
 		switch ($this->login_type) {
 			case 'session':
-				$this->uuid = Session::get('uuid','oa');
-				$this->user_info = Session::get('user_info','oa');
+				$this->uuid = Session::get('uuid');
+				$this->user_info = Session::get('user_info');
 				if($this->uuid && $this->user_info){
 					$check_status = true;
 				}
@@ -53,9 +55,9 @@ class Auth extends BaseController
 		if($user_info){
 			switch ($this->login_type) {
 				case 'session':
-					Session::set('uuid',$user_info['id'], 'oa');
-					Session::set('user_info',$user_info, 'oa');
-					if( Session::has('uuid','oa') && Session::has('user_info','oa') )
+					Session::set('uuid',$user_info['id']);
+					Session::set('user_info',$user_info);
+					if( Session::has('uuid') && Session::has('user_info') )
 						$set_access = true;
 					break;
 				case 'cache':
@@ -79,8 +81,8 @@ class Auth extends BaseController
 	{
 		switch ($this->login_type) {
 			case 'session':
-				Session::delete('uuid','oa');
-				Session::delete('user_info','oa');
+				Session::delete('uuid');
+				Session::delete('user_info');
 				break;
 			case 'cache':
 				break;

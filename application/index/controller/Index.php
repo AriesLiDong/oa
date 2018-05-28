@@ -18,7 +18,9 @@ class Index extends ControllerBase
 
     public function index()
     {
-    	$flag = Session::get('user_name');
+    	$user_info = Session::get('user_info');
+    	$this->assign('name',$user_info['username']);
+    	$this->assign('out_url',url('login/login/login'));
     	return $this->fetch();
     }
 }

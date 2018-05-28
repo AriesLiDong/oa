@@ -2,12 +2,25 @@
 
 {block name="main-content"}
 	<div id="page-wrapper">
-		<div class="header"> 
+		<div class="header">
             <h1 class="page-header">
-            </h1>			
+            </h1>
 		</div>
-		<div id="page-inner">
-			
+		<div >
+			<iframe id="page-inner" src="http://www.baidu.com" frameborder="0"></iframe>
 		</div>
 	</div>
+
+{/block}
+{block name="javascript"}
+	<script>
+		var tab = $("a[page_tab]");
+		$.each(tab,function(k,v){
+			$(v).click(function(){
+				var jump_url =  $(v).attr('page_tab');
+				$("#page-inner").attr('src',jump_url);
+			});
+		});
+
+	</script>
 {/block}

@@ -99,13 +99,13 @@
 
 
         <!-- Javascript -->
-        <script src="/login/js/jquery-1.11.1.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script src="/login/bootstrap/js/bootstrap.min.js"></script>
         <script src="/login/js/jquery.backstretch.min.js"></script>
         <script src="/login/js/scripts.js"></script>
         <script src="/common/load.js"></script>
         <!--[if lt IE 10]>
-            <script src="assets/js/placeholder.js"></script>
+        <script src="assets/js/placeholder.js"></script>
         <![endif]-->
 
     </body>
@@ -114,9 +114,14 @@
             $("#submit").click(function(){
                 var name = $('input[name="form-username"]').val();
                 var pwd = $('input[name="form-password"]').val();
-                // loadPOST('index/index/login_action',{'name':name,'pwd':pwd},function(res){
-                //     console.log(res);
-                // });                         
+                alert(122)
+                 loadPOST('index/index/login_action',{'name':name,'pwd':pwd},function(res){
+                     if(res){
+                         window.location.replace("http://www.jb51.net");
+                     }else{
+                         alert('用户名密码错误');
+                     }
+                 });
             });
         });
     </script>
