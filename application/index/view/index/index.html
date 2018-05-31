@@ -2,13 +2,11 @@
 
 {block name="main-content"}
 	<div id="page-wrapper">
-		<div class="header">
+		<div id="page-header" class="header">
             <h1 class="page-header">
             </h1>
 		</div>
-		<div >
-			<iframe id="page-inner" src="http://www.baidu.com" frameborder="0"></iframe>
-		</div>
+			<iframe src="http://www.baidu.com" frameborder="none" scrolling="auto" style="width: 100%; height: 100%"></iframe>
 	</div>
 
 {/block}
@@ -18,9 +16,11 @@
 		$.each(tab,function(k,v){
 			$(v).click(function(){
 				var jump_url =  $(v).attr('page_tab');
-				$("#page-inner").attr('src',jump_url);
+				$("iframe").attr('src',jump_url);
 			});
 		});
-
+		var page_height = $("#page-wrapper").outerHeight();
+		var head_height = $("#page-header").height();
+		$("iframe").height(page_height-head_height);
 	</script>
 {/block}
