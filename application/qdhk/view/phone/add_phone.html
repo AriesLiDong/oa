@@ -1,0 +1,34 @@
+{extend name="public@iframe:base" /}
+
+{block name="main-content"}
+<div class="card">
+    <div class="card-action">
+        添加电话名录
+    </div>
+    <div class="card-content">
+        <form id="add-form" class="col s12">
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="user_name" type="text" class="validate">
+                    <label for="user_name">用户名</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="telephone" type="tel" class="validate">
+                    <label for="telephone">电话</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="depart" type="text" class="validate">
+                    <label for="depart">部门</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="service" type="tel" class="validate">
+                    <label for="service">服务商</label>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+{/block}

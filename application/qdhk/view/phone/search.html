@@ -3,8 +3,10 @@
 {block name="main-content"}
 <div class="card">
     <div class="card-action">
-        Advanced Tables
-        <button class="btn btn-default" type="submit">Button</button>
+        电话账单名录
+        <div style="display: inline-block;float: right">
+            <button id="add" class="btn btn-primary" type="submit">添加</button>
+        </div>
     </div>
     <div class="card-content">
         <div class="table-responsive">
@@ -19,6 +21,28 @@
 <script>
     $(function(){
         addTable();
+        $("#add").click(function(){
+            //iframe层-父子操作
+            layer.open({
+                type: 2,
+                area: ['1000px', '800px'],
+                fixed: false, //不固定
+                maxmin: true,
+                content: 'add_phone',
+                btn: ['确认', '取消'],
+                yes: function(index, layero){
+                    var form = $(layero).find("iframe")[0].contentWindow.document.getElementById("add-form");
+                    var user_name = $(form).find("#user_name").val();
+                    var telephone = $(form).find("#telephone").val();
+                    var depart = $(form).find("#depart").val();
+                    console.log(user_name);
+                    console.log(telephone);
+                    console.log(depart);
+                    //do something
+//                    layer.close(index); //如果设定了yes回调，需进行手工关闭
+                }
+            });
+        });
     });
 
     //添加表格

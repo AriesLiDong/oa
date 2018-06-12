@@ -18,4 +18,8 @@ class Phone extends ControllerBase
             'count'=>$res['count']
         );
     }
+
+    public function add_phone(){
+        return $this->fetch();
+    }
 }
