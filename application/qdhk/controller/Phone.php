@@ -108,4 +108,11 @@ class Phone extends ControllerBase
             return false;
         }
     }
+
+    /*
+    *联通报表制作
+    **/
+    public function liantong_report(){
+        return $this->fetch();
+    }
 }

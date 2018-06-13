@@ -22,6 +22,7 @@ class Index extends ControllerBase
     	$this->assign('name',$user_info['username']);
     	$this->assign('out_url',url('login/login/login'));
     	$this->assign('phone_url',url('qdhk/phone/search'));
+        $this->assign('liantong_report',url('qdhk/phone/liantong_report'));
     	return $this->fetch();
     }
 }
