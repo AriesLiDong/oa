@@ -9,8 +9,8 @@ class Base extends Controller
 	{
 
 		$return_code = array(
-			'code'=>'500',
-			'msg'=>'未定义消息',
+			'code'=>$code ? $code : '500',
+			'msg'=>$msg ? $msg :'未定义消息',
 			'data'=>$data
 		);
 	}

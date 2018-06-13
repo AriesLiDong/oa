@@ -3,27 +3,28 @@
 {block name="main-content"}
 <div class="card">
     <div class="card-action">
-        添加电话名录
+        编辑电话名录
     </div>
     <div class="card-content">
-        <form id="add-form" class="col s12">
+        <form id="edit-form" class="col s12">
+            <input id="id" type="hidden" name="id" value="{$user_info['id']}">
             <div class="row">
                 <div class="input-field col s6">
-                    <input id="user_name" type="text" class="validate">
+                    <input id="user_name" type="text" class="validate" value="{$user_info['username']}">
                     <label for="user_name">用户名</label>
                 </div>
                 <div class="input-field col s6">
-                    <input id="telephone" type="tel" class="validate">
+                    <input id="telephone" type="tel" class="validate" value="{$user_info['number']}">
                     <label for="telephone">电话</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s6">
-                    <input id="depart" type="text" class="validate">
+                    <input id="depart" type="text" class="validate" value="{$user_info['department']}">
                     <label for="depart">部门</label>
                 </div>
                 <div class="input-field col s6">
-                    <input id="service" type="tel" class="validate">
+                    <input id="service" type="tel" class="validate" value="{$user_info['service']}">
                     <label for="service">服务商</label>
                 </div>
             </div>

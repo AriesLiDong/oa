@@ -5,7 +5,9 @@
     <div class="card-action">
         电话账单名录
         <div style="display: inline-block;float: right">
-            <button id="add" class="btn btn-primary" type="submit">添加</button>
+            <button id="add" class="btn btn-primary" >添加</button>
+            <button id="edit" class="btn btn-warning">编辑</button>
+            <button id="del" class="btn btn-danger">删除</button>
         </div>
     </div>
     <div class="card-content">
@@ -35,13 +37,83 @@
                     var user_name = $(form).find("#user_name").val();
                     var telephone = $(form).find("#telephone").val();
                     var depart = $(form).find("#depart").val();
-                    console.log(user_name);
-                    console.log(telephone);
-                    console.log(depart);
-                    //do something
-//                    layer.close(index); //如果设定了yes回调，需进行手工关闭
+                    var service = $(form).find('#service').val();
+                    if(!telephone || !depart || !service){
+                        layer.msg('电话或部门或服务商必填！');
+                    }else{
+                        var params = {'user_name':user_name,'telephone':telephone,'depart':depart,'service':service};
+                        loadPOST('add_action',params,function(res){
+                            if(res){
+                                layer.close(index); //如果设定了yes回调，需进行手工关闭
+                                layer.msg('添加成功',{icon: 1});
+                                table.draw();
+                            }else{
+                                layer.msg('系统错误添加失败！');
+                            }
+                        });
+                    }
                 }
             });
+        });
+        $("#edit").click(function(){
+            var check = $("input[type=checkbox]:checked");
+            if(check.length==1){
+                //iframe层-父子操作
+                layer.open({
+                    type: 2,
+                    area: ['1000px', '800px'],
+                    fixed: false, //不固定
+                    maxmin: true,
+                    content: 'edit_phone.html?id='+check.val(),
+                    btn: ['确认', '取消'],
+                    yes: function(index, layero){
+                        var form = $(layero).find("iframe")[0].contentWindow.document.getElementById("edit-form");
+                        var id = $(form).find("#id").val();
+                        var user_name = $(form).find("#user_name").val();
+                        var telephone = $(form).find("#telephone").val();
+                        var depart = $(form).find("#depart").val();
+                        var service = $(form).find("#service").val();
+                        if(!telephone || !depart || !service){
+                            layer.msg('电话或部门必填！');
+                        }else{
+                            var params = {'id':id,'user_name':user_name,'telephone':telephone,'depart':depart,'service':service};
+                            loadPOST('edit_action',params,function(res){
+                                if(res){
+                                    layer.close(index); //如果设定了yes回调，需进行手工关闭
+                                    layer.msg('编辑成功',{icon: 1});
+                                    table.draw();
+                                }else{
+                                    layer.msg('系统错误编辑失败！');
+                                }
+                            });
+                        }
+                    }
+                });
+            }else{
+                layer.msg('请选择一条数据！');
+            }
+        });
+        $("#del").click(function(){
+            var check = $("input[type=checkbox]:checked");
+            if(check.length>0){
+                layer.confirm('确定要删除吗？', {
+                    btn: ['确定','取消'] //按钮
+                }, function(){
+                    var id = check.val();
+                    var params = {'id':id};
+                    loadPOST('del_action',params,function(res){
+                        if(res){
+                            layer.msg('删除成功',{icon: 1});
+                            table.draw();
+                        }else{
+                            layer.msg('系统错误添加失败！');
+                        }
+                    });
+                });
+            }else{
+                layer.msg('请选择数据！');
+            }
+
         });
     });
 
@@ -52,6 +124,10 @@
             "autoWidth": false,
             "searching": false,
             columns: [
+                {
+                    data: null,
+                    title: ""
+                },
                 { "data": "id",  "title":"ID"},
                 { "data": "number", "title":"电话"},
                 { "data": "username", "title":"用户"},
@@ -59,6 +135,13 @@
                 { "data": "department", "title":"部门", "defaultContent":""}
 
             ],
+            columnDefs: [{
+                //   指定第一列，从0开始，0表示第一列，1表示第二列……
+                targets: 0,
+                render: function(data, type, row, meta) {
+                    return '<input type="checkbox" id="test'+row.id+'"  value="'+row.id+'"/><label for="test'+row.id+'"></label>';
+                }
+            }],
             language: {
                 "lengthMenu": "每页 _MENU_ 条记录",
                 "zeroRecords": "没有找到记录",
@@ -108,9 +191,13 @@
                         returnData.recordsFiltered = result.count;
                         returnData.data = result.auth_group;
                         fnCallback(returnData);
+                        layer.closeAll('loading');
                     }
                 });
             },
+            "drawCallback": function( settings ) {
+               layer.load();
+            }
         });
     }
 
