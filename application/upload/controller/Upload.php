@@ -6,6 +6,7 @@ use think\Session;
 class Upload extends ControllerBase
 {
     public function up(){
+        set_time_limit(0);
         $path = ROOT_PATH.'public/';
 //        print_r(ROOT_PATH  );exit;
         if(is_uploaded_file($_FILES['excel_file']['tmp_name'])){                                            //判断是否是上传文件
