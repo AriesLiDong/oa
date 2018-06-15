@@ -13,7 +13,7 @@ class Upload extends ControllerBase
     }
 
     public function get_progress(){
-        print_r(Session::get());
-        print_r($_REQUEST);exit;
+//        print_r(Session::get());
+//        print_r($_REQUEST);exit;
     }
 }
