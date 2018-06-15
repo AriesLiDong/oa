@@ -113,6 +113,15 @@ class Phone extends ControllerBase
     *联通报表制作
     **/
     public function liantong_report(){
+        $this->assign('upload_url',url('upload/upload/up'));
+        $this->assign('get_progress',url('upload/upload/get_progress'));
         return $this->fetch();
+    }
+
+    /*
+     * 上传文件
+     * */
+    public function upload(){
+
     }
 }
