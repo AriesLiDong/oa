@@ -7,3 +7,10 @@ session.upload_progress.freq[=1%]	更新进度的频率(已经处理的字节数), 也支持百分比
 session.upload_progress.min_freq[=1.0]	更新进度的时间间隔(秒级)
 
 post_max_size = 100M
+
+session.upload_progress.enabled[=1] : 是否启用上传进度报告(默认开启)
+session.upload_progress.cleanup[=1] : 是否在上传完成后及时删除进度数据(默认开启, 推荐开启).
+session.upload_progress.prefix[=upload_progress_] : 进度数据将存储在_SESSION[session.upload_progress.prefix . _POST[session.upload_progress.name]]
+session.upload_progress.name[=PHP_SESSION_UPLOAD_PROGRESS] : 如果_POST[session.upload_progress.name]没有被设置, 则不会报告进度.
+session.upload_progress.freq[=1%] : 更新进度的频率(已经处理的字节数), 也支持百分比表示’%’.
+session.upload_progress.min_freq[=1.0] : 更新进度的时间间隔(秒级)
