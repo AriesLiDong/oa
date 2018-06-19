@@ -1,6 +1,5 @@
 <?php
 namespace app\qdhk\controller;
-
 use app\base\controller\Base as ControllerBase;
 use app\base\model\PhoneUser as PhoneUserModel;
 class Phone extends ControllerBase
@@ -115,13 +114,15 @@ class Phone extends ControllerBase
     public function liantong_report(){
         $this->assign('upload_url',url('upload/upload/up'));
         $this->assign('get_progress',url('upload/upload/get_progress'));
+        $this->assign('create_report',url('report/excel/liantong_report'));
         return $this->fetch();
     }
 
     /*
      * 上传文件
      * */
-    public function upload(){
-
+    public function create_report(){
+        $phpexcel = new \PHPExcel();
+        print_r($phpexcel);exit;
     }
 }
