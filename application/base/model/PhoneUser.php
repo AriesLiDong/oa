@@ -15,13 +15,19 @@ class PhoneUser extends Model
         return $user;
     }
 
-    public function search(){
-        $phoneuser = $this->limit(10)->order('id','asc')->select()->toArray();
+    public function search($start=null,$limit=null,$sort=[]){
+        $phoneuser = $this->limit($start,$limit)->order($sort['name'],$sort['dir'])->select()->toArray();
         $count = $this->count();
+
         return ['data'=>$phoneuser,'count'=>$count];
     }
 
     public function add($data){
+        $res = $this->insert($data);
+        return $res;
+    }
+
+    public function add_m($data){
         $res = $this->insert($data);
         return $res;
     }

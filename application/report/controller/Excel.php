@@ -2,6 +2,7 @@
 namespace app\report\controller;
 use \app\base\controller\Base as ControllerBase;
 use think\Session;
+use app\base\model\PhoneUser as PhoneUserModel;
 vendor("PHPExcel.PHPExcel");
 
 class Excel extends ControllerBase
@@ -66,7 +67,18 @@ class Excel extends ControllerBase
     public function import_phoneuser(){
         $filename = 'baoxiaojieguo.xlsx';
         $sheet = '0';
+        $jump = [1,31,49,55,63,74,256,291,299,336,357,382,388,403,458,464,467,474];
         $data = $this->im_report($filename,$sheet);
-        print_r($data);exit;
+        $number = array();
+        foreach($data[0] as $key=>$value){
+            if(in_array($key,$jump))
+                continue;
+            $number[] = ['number'=>$value['A'],'service'=>'联通'];
+        }
+        $phoneuser_model = new PhoneUserModel();
+        $res = $phoneuser_model->add_m($number);
+        return $res;
     }
+
+
 }

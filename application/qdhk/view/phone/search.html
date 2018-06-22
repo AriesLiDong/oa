@@ -160,20 +160,21 @@
                 //封装请求参数
                 var param = {};
                 $.each(data,function(k,v){
-                    if(v.name=='draw'){
-                        param.draw = v.value;
+                    if(k=='draw'){
+                        param.draw = v;
                     }
-                    if(v.name=='order'){
-                        param.sort = {'name':data[1].value[v.value[0].column].data, 'dir':v.value[0].dir};
+                    if(k=='order'){
+                        param.sort = {'name':data.columns[v[0].column].data, 'dir':v[0].dir};
                     }
-                    if(v.name=='start'){
-                        param.start = v.value;
+                    if(k=='start'){
+                        param.start = v;
                     }
-                    if(v.name=='length'){
-                        param.limit = v.value;
+                    if(k=='length'){
+                        param.limit = v;
                     }
 
                 });
+
                 oSettings.jqXHR = $.ajax({
                     "dataType": 'json',
                     "type": "GET",

@@ -13,7 +13,10 @@ class Phone extends ControllerBase
      * */
     public function search_phone(){
         $phoneuser_model = new PhoneUserModel();
-        $res = $phoneuser_model->search();
+        $start = input('start') ?: 0;
+        $limit = input('limit') ?: 10;
+        $sort = input('sort/a');
+        $res = $phoneuser_model->search($start,$limit,$sort);
         return array(
             'draw'=>(int)input('draw'),
             'auth_group'=>$res['data'],
