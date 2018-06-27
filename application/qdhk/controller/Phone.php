@@ -117,7 +117,7 @@ class Phone extends ControllerBase
     public function liantong_report(){
         $this->assign('upload_url',url('upload/upload/up'));
         $this->assign('get_progress',url('upload/upload/get_progress'));
-        $this->assign('create_report',url('report/excel/liantong_report'));
+        $this->assign('create_report',url('report/excel/create_liantongReport'));
         return $this->fetch();
     }
 

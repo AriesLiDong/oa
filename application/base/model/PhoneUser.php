@@ -1,5 +1,6 @@
 <?php
 namespace app\base\model;
+use app\qdhk\controller\Phone;
 use think\Model;
 
 class PhoneUser extends Model
@@ -12,6 +13,12 @@ class PhoneUser extends Model
     public function getPhoneUsrById($id)
     {
         $user = PhoneUser::get($id);
+        return $user;
+    }
+
+    public function getAll()
+    {
+        $user = $this->order('sort','asc')->select()->toArray();
         return $user;
     }
 
@@ -28,7 +35,7 @@ class PhoneUser extends Model
     }
 
     public function add_m($data){
-        $res = $this->insert($data);
+        $res = $this->insertAll($data);
         return $res;
     }
 
