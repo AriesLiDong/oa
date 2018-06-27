@@ -133,7 +133,8 @@
 	}
 
 	function createexcel() {
-		window.location.href = '{$create_report}';
+	    var result = loadGet('{$create_report}');
+		console.log(result);
 	}
 </script>
 {/block}

@@ -17,7 +17,9 @@ class Upload extends ControllerBase
             }
             $uid = Session::get('uuid');
             $tmpname = $_FILES['excel_file']['name'];
-            $filename = $uid.'_'.$type.$step.'.'.explode('.',$tmpname)[1];
+            $tail = explode('.',$tmpname);
+            $count = count($tail);
+            $filename = $uid.'_'.$type.$step.'.'.$tail[$count-1];
             if(is_uploaded_file($_FILES['excel_file']['tmp_name'])){                                            //判断是否是上传文件
                 //unlink($_FILES['file1']['tmp_name']);
                 move_uploaded_file($_FILES['excel_file']['tmp_name'], $path.$filename);     //将缓存文件移动到指定位置

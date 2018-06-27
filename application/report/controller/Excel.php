@@ -63,7 +63,7 @@ class Excel extends ControllerBase
         return $data;
     }
 
-    protected function out_report($data){
+    protected function out_liantongreport($data){
         error_reporting(E_ALL);
         date_default_timezone_set('Asia/chongqing');
         $objPHPExcel = new \PHPExcel();
@@ -116,6 +116,22 @@ class Excel extends ControllerBase
         $objWriter->save(ROOT_PATH.'public\download\2.xls');
     }
 
+    protected function out_liantongdepartment($data){
+        $temPath = ROOT_PATH.'public\moban\liantong.xlsx';
+        //检查文件路径
+        if(!file_exists($temPath)){
+            $this->error('模板不存在');
+            return;
+        }
+        //加载模板
+        $phpexcel =  \PHPExcel_IOFactory::createReader("Excel2007")->load($temPath);
+        $phpexcel->setActiveSheetIndex(0);
+        $active = $phpexcel->getActiveSheet();
+        $active->setCellValue('A1',0);
+        $objWriter = \PHPExcel_IOFactory::createWriter($phpexcel, 'Excel5');
+        $objWriter->save(ROOT_PATH.'public\download\3.xls');
+    }
+
     protected  function set_title($ck,$obj){
         //水平居中
         $obj->getStyle($ck)->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
@@ -128,6 +144,7 @@ class Excel extends ControllerBase
         $obj->getStyle($ck)->getFill()->getStartColor()->setARGB('FFCAE8EA');
         return $obj;
     }
+
     public function import_phoneuser(){
         $filename = 'baoxiaojieguo.xlsx';
         $sheet = '0';
@@ -191,8 +208,11 @@ class Excel extends ControllerBase
             }
         }
 
-        $this->out_report($data);
-
+        //制作报销结果表
+        $this->out_liantongreport($data);
+        //制作各部门话费表
+        $this->out_liantongdepartment($data);
+        return true;
     }
 
     protected function liantong_sheet2($sheet,$data){
