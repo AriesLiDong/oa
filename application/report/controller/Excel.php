@@ -64,6 +64,7 @@ class Excel extends ControllerBase
     }
 
     protected function out_liantongreport($data){
+        $uid = Session::get('uuid');
         error_reporting(E_ALL);
         date_default_timezone_set('Asia/chongqing');
         $objPHPExcel = new \PHPExcel();
@@ -113,10 +114,14 @@ class Excel extends ControllerBase
         $objPHPExcel->getActiveSheet()->setTitle('ASD');
         $objPHPExcel->setActiveSheetIndex(0);
         $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
-        $objWriter->save(ROOT_PATH.'public\download\2.xls');
+        $name = iconv("UTF-8","GB2312//IGNORE",'报销-结果表.xlsx');
+        $filename = $uid.$name;
+        $objWriter->save(ROOT_PATH.'public\download\\'.$filename);
+        return $filename;
     }
 
     protected function out_liantongdepartment($data){
+        $uid = Session::get('uuid');
         $temPath = ROOT_PATH.'public\moban\liantong.xlsx';
         //检查文件路径
         if(!file_exists($temPath)){
@@ -129,7 +134,10 @@ class Excel extends ControllerBase
         $active = $phpexcel->getActiveSheet();
         $active->setCellValue('A1',0);
         $objWriter = \PHPExcel_IOFactory::createWriter($phpexcel, 'Excel5');
-        $objWriter->save(ROOT_PATH.'public\download\3.xls');
+        $name = iconv("UTF-8","GB2312//IGNORE",'联通--各部门话费.xlsx');
+        $filename = $uid.$name;
+        $objWriter->save(ROOT_PATH.'public\download\\'.$filename);
+        return $filename;
     }
 
     protected  function set_title($ck,$obj){
@@ -209,9 +217,12 @@ class Excel extends ControllerBase
         }
 
         //制作报销结果表
-        $this->out_liantongreport($data);
+        $file1 = $this->out_liantongreport($data);
         //制作各部门话费表
-        $this->out_liantongdepartment($data);
+        $file2 = $this->out_liantongdepartment($data);
+        //设置下载文件
+        Session::set('liantong_file1',$file1);
+        Session::set('liantong_file2',$file2);
         return true;
     }
 
