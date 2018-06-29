@@ -133,8 +133,14 @@
 	}
 
 	function createexcel() {
-	    var result = loadGet('{$create_report}');
-		console.log(result);
+		loadGet('{$create_report}','',function(data){
+            $("button").text('下载');
+            $("button").attr("onclick","downloadexcel();")
+		});
+	}
+
+	function downloadexcel(){
+
 	}
 </script>
 {/block}
