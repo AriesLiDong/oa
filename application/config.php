@@ -248,4 +248,10 @@ return [
 
     //登录方式
     'login_type'=> 'session',
+
+    //上传地址
+    'upload_path'=>ROOT_PATH.'public\upload\\',
+
+    //下载地址
+    'down_path'=>ROOT_PATH.'public\download\\',
 ];

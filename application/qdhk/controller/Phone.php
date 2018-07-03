@@ -118,14 +118,9 @@ class Phone extends ControllerBase
         $this->assign('upload_url',url('upload/upload/up'));
         $this->assign('get_progress',url('upload/upload/get_progress'));
         $this->assign('create_report',url('report/excel/create_liantongReport'));
+        $this->assign('down_report',url('upload/upload/down'));
         return $this->fetch();
     }
 
-    /*
-     * 上传文件
-     * */
-    public function create_report(){
-        $phpexcel = new \PHPExcel();
-        print_r($phpexcel);exit;
-    }
+
 }
