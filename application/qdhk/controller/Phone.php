@@ -16,7 +16,8 @@ class Phone extends ControllerBase
         $start = input('start') ?: 0;
         $limit = input('limit') ?: 10;
         $sort = input('sort/a');
-        $res = $phoneuser_model->search($start,$limit,$sort);
+        $number = input('number');
+        $res = $phoneuser_model->search($start,$limit,$sort,$number);
         return array(
             'draw'=>(int)input('draw'),
             'auth_group'=>$res['data'],

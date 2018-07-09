@@ -22,9 +22,11 @@ class PhoneUser extends Model
         return $user;
     }
 
-    public function search($start=null,$limit=null,$sort=[]){
-        $phoneuser = $this->limit($start,$limit)->order($sort['name'],$sort['dir'])->select()->toArray();
-        $count = $this->count();
+    public function search($start=null,$limit=null,$sort=[],$number=null){
+        $map = array();
+        $map['number'] = array('like',"%".$number."%");
+        $phoneuser = $this->where($map)->limit($start,$limit)->order($sort['name'],$sort['dir'])->select()->toArray();
+        $count = $this->where($map)->count();
 
         return ['data'=>$phoneuser,'count'=>$count];
     }

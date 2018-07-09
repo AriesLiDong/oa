@@ -114,15 +114,15 @@ class Excel extends ControllerBase
         $objPHPExcel->getActiveSheet()->setTitle('ASD');
         $objPHPExcel->setActiveSheetIndex(0);
         $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
-        $name = iconv("UTF-8","GB2312//IGNORE",'报销-结果表.xlsx');
+        $name = iconv("UTF-8","GB2312//IGNORE",'baoxiao_jieguobiao.xlsx');
         $filename = $uid.$name;
-        $objWriter->save(ROOT_PATH.'public\download\\'.$filename);
+        $objWriter->save(ROOT_PATH.'public/download/'.$filename);
         return $filename;
     }
 
     protected function out_liantongdepartment($data){
         $uid = Session::get('uuid');
-        $temPath = ROOT_PATH.'public\moban\liantong.xlsx';
+        $temPath = ROOT_PATH.'public/moban/liantong.xlsx';
         //检查文件路径
         if(!file_exists($temPath)){
             $this->error('模板不存在');
@@ -134,9 +134,9 @@ class Excel extends ControllerBase
         $active = $phpexcel->getActiveSheet();
         $active->setCellValue('A1',0);
         $objWriter = \PHPExcel_IOFactory::createWriter($phpexcel, 'Excel5');
-        $name = iconv("UTF-8","GB2312//IGNORE",'联通--各部门话费.xlsx');
+        $name = iconv("UTF-8","GB2312//IGNORE",'liantong_bumenhuafei.xlsx');
         $filename = $uid.$name;
-        $objWriter->save(ROOT_PATH.'public\download\\'.$filename);
+        $objWriter->save(ROOT_PATH.'public/download/'.$filename);
         return $filename;
     }
 

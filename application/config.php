@@ -250,8 +250,8 @@ return [
     'login_type'=> 'session',
 
     //上传地址
-    'upload_path'=>ROOT_PATH.'public\upload\\',
+    'upload_path'=>ROOT_PATH.'public/upload/',
 
     //下载地址
-    'down_path'=>ROOT_PATH.'public\download\\',
+    'down_path'=>ROOT_PATH.'public/download/',
 ];

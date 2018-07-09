@@ -43,7 +43,7 @@ class Upload extends ControllerBase
 //        $file2 = Session::get('liantong_file2');
 //        $zip = new ZipArchive();
         $down_path = Config::get('down_path');
-        if( empty($file1) || empty($file2) ){
+        if( empty($file1) ){
             $this->error('文件不能为空');
         }
         $file = fopen ( $down_path.$file1, "rb" );
