@@ -2,6 +2,7 @@
 namespace app\qdhk\controller;
 use app\base\controller\Base as ControllerBase;
 use app\base\model\PhoneUser as PhoneUserModel;
+use think\Config;
 class Phone extends ControllerBase
 {
     public function search(){
@@ -55,11 +56,13 @@ class Phone extends ControllerBase
             if(!$params['telephone'] || !$params['depart'] || !$params['service']){
                 self::showReturnCode(500,'缺少必要信息');
             }
+            $depart_sort = Config::get('depart_sort');
             $data = array(
                 'number'=>$params['telephone'],
                 'username'=>$params['user_name'],
                 'service'=>$params['service'],
-                'department'=>$params['depart']
+                'department'=>$params['depart'],
+                'sort'=>$depart_sort[$params['depart']]
             );
 
             $phoneuser_model = new PhoneUserModel();
@@ -79,12 +82,14 @@ class Phone extends ControllerBase
             if(!$params['id'] || !$params['telephone'] || !$params['depart'] || !$params['service']){
                 self::showReturnCode(500,'缺少必要信息');
             }
+            $depart_sort = Config::get('depart_sort');
             $data = array(
                 'id'=>$params['id'],
                 'number'=>$params['telephone'],
                 'username'=>$params['user_name'],
                 'service'=>$params['service'],
-                'department'=>$params['depart']
+                'department'=>$params['depart'],
+                'sort'=>$depart_sort[$params['depart']]
             );
 
             $phoneuser_model = new PhoneUserModel();

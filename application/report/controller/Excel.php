@@ -93,6 +93,9 @@ class Excel extends ControllerBase
                 $active = $this->set_title('A'.$index,$active);
                 $index++;
             }else{
+                if(empty($v['department'])){
+                    $this->error($k.' 未添加','',$k);
+                }
                 if($tempname!=$v['department']){
                     $tempname = $v['department'];
                     $active->setCellValue('G'.($index-1),$total);

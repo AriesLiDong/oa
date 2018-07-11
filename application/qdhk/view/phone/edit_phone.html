@@ -20,8 +20,29 @@
             </div>
             <div class="row">
                 <div class="input-field col s6">
-                    <input id="depart" type="text" class="validate" value="{$user_info['department']}">
-                    <label for="depart">部门</label>
+                    <div class="s1">
+                        部门
+                    </div>
+                    <select id="depart" name="depart" class="form-control">
+                        <option value="NAN">-请选择部门-</option>
+                        <option value="总裁办">总裁办</option>
+                        <option value="信息中心">信息中心</option>
+                        <option value="人力">人力</option>
+                        <option value="财务">财务</option>
+                        <option value="综合事业">综合事业</option>
+                        <option value="运控">运控</option>
+                        <option value="市场">市场</option>
+                        <option value="地服">地服</option>
+                        <option value="安监">安监</option>
+                        <option value="机务">机务</option>
+                        <option value="AOC">AOC</option>
+                        <option value="运标">运标</option>
+                        <option value="飞管">飞管</option>
+                        <option value="客舱">客舱</option>
+                        <option value="保卫">保卫</option>
+                        <option value="引进办">引进办</option>
+                        <option value="飞行">飞行</option>
+                    </select>
                 </div>
                 <div class="input-field col s6">
                     <input id="service" type="tel" class="validate" value="{$user_info['service']}">
@@ -32,4 +53,10 @@
 
     </div>
 </div>
+{/block}
+{block name="javascript"}
+<script>
+    var depart = "{$user_info['department']}";
+    $("select").val(depart);
+</script>
 {/block}
