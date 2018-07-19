@@ -22,6 +22,14 @@ class PhoneUser extends Model
         return $user;
     }
 
+    public function getLianTong()
+    {
+        $map = array();
+        $map['service'] = '联通';
+        $user = $this->where($map)->order('sort','asc')->select()->toArray();
+        return $user;
+    }
+
     public function search($start=null,$limit=null,$sort=[],$number=null){
         $map = array();
         $map['number'] = array('like',"%".$number."%");

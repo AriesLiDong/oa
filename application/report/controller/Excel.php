@@ -183,7 +183,7 @@ class Excel extends ControllerBase
 
         //获取电话用户
         $phoneuser_model = new PhoneUserModel();
-        $data = $phoneuser_model->getAll();
+        $data = $phoneuser_model->getLianTong();
         //整理数据
         $temp = array();
         foreach ($data as $k=>$v){
